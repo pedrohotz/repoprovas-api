@@ -5,6 +5,7 @@ import cors from "cors";
 import "reflect-metadata";
 
 import connectDatabase from "./database";
+import * as provasController from './controllers/provasController';
 
 
 const app = express();
@@ -14,5 +15,8 @@ app.use(express.json());
 export async function init () {
   await connectDatabase();
 }
+
+app.post('/prova', provasController.send);
+
 
 export default app;
