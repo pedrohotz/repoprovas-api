@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { Prova } from "../interfaces/provasInterfaces";
+import { Prova, ProvaBody } from "../interfaces/provasInterfaces";
 import { provaSchemma } from "../schemmas/provaSchemma";
 import * as provasService from "../services/provasService";
 
@@ -17,8 +17,21 @@ async function send(req: Request, res: Response) : Promise<Response<any,Record<s
     }
 }
 
+async function listBySubject(req: Request, res: Response): Promise<Response> {
+    const filter = req.params.subject;
+    try {
+        const result = await provasService.listBySubject(filter);
+        if(!result) return res.sendStatus(404);
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+}
+
 
 
 export {
-    send
+    send,
+    listBySubject
 }

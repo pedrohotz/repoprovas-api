@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-
 @Entity('provas')
 export default class ProvaEntity{
     @PrimaryGeneratedColumn()

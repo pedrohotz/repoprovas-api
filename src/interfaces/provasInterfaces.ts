@@ -7,7 +7,13 @@ interface Prova {
 }
 
 
-
+interface ProvaBody {
+    Name: string,
+    Categoria: string,
+    Professor: string,
+    Disciplina: string,
+    Link: string,
+}
 
 
 
@@ -17,4 +23,5 @@ interface Prova {
 
 export {
     Prova,
+    ProvaBody,
 }
