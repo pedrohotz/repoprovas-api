@@ -17,10 +17,10 @@ async function send(req: Request, res: Response) : Promise<Response<any,Record<s
     }
 }
 
-async function listBySubject(req: Request, res: Response): Promise<Response> {
-    const filter = req.params.subject;
+async function listByFilter(req: Request, res: Response): Promise<Response> {
+    const filter = req.params.filter;
     try {
-        const result = await provasService.listBySubject(filter);
+        const result = await provasService.listByFilter(filter);
         if(!result) return res.sendStatus(404);
         return res.status(200).send(result)
     } catch (error) {
@@ -33,5 +33,5 @@ async function listBySubject(req: Request, res: Response): Promise<Response> {
 
 export {
     send,
-    listBySubject
+    listByFilter,
 }

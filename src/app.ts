@@ -17,6 +17,6 @@ export async function init () {
 }
 
 app.post('/prova', provasController.send);
-app.get('/prova/:subject',provasController.listBySubject);
+app.get('/prova/:filter',provasController.listByFilter);
 
 export default app;
