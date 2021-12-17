@@ -8,12 +8,12 @@ async function send(req: Request, res: Response) : Promise<Response<any,Record<s
     try {
         const { error } = provaSchemma.validate(provaBody);
         if(error) return res.sendStatus(400);
-        await provasService.send(provaBody);
-        res.sendStatus(201);
+        const result = await provasService.send(provaBody);
+        if(!result) return res.sendStatus(409);
+        return res.status(201).send("Prova inserida");
 
     } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
+        return res.status(500).send("Internal Error");
     }
 }
 
