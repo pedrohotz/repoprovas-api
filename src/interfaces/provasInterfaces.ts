@@ -16,6 +16,11 @@ interface ProvaBody {
 }
 
 
+interface DisciplinaBody{
+    Id: number;
+    Name: string;
+    periodo: number;
+}
 
 
 
@@ -24,4 +29,5 @@ interface ProvaBody {
 export {
     Prova,
     ProvaBody,
+    DisciplinaBody
 }

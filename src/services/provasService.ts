@@ -1,4 +1,4 @@
-import { Prova, ProvaBody } from "../interfaces/provasInterfaces";
+import { DisciplinaBody, Prova, ProvaBody } from "../interfaces/provasInterfaces";
 import {getManager, getRepository} from 'typeorm';
 import ProvaEntity from "../entities/Provas";
 import Disciplina from "../entities/Disciplinas";
@@ -63,10 +63,17 @@ async function listTeacher() : Promise<ProfessorBody[]>{
     return result;
 }
 
+async function listSubject() : Promise<DisciplinaBody[]>{
+    const result = await getRepository(Disciplina).find();
+    if(result.length === 0) return null;
+    return result;
+}
+
 
 
 export {
     send,
     listByFilter,
     listTeacher,
+    listSubject,
 }

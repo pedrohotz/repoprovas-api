@@ -39,8 +39,20 @@ async function listTeacher(req: Request, res: Response) : Promise<Response<any,R
     }
 }
 
+async function listSubject(req: Request, res: Response) : Promise<Response<any,Record<string,any>>> {
+    try {
+        const result = await provasService.listSubject();
+        if(!result) return res.sendStatus(404);
+        return res.status(200).send(result);
+    } catch (error) {
+        res.sendStatus(500);
+    }
+}
+
+
 export {
     send,
     listByFilter,
     listTeacher,
+    listSubject,
 }

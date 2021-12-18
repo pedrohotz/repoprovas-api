@@ -9,4 +9,7 @@ export default class Disciplina{
     @Column()
     Name: string;
 
+    @Column()
+    periodo: number;
+
 }
