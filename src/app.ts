@@ -18,5 +18,6 @@ export async function init () {
 
 app.post('/prova', provasController.send);
 app.get('/prova/:filter',provasController.listByFilter);
+app.get('/professores',provasController.listTeacher);
 
 export default app;

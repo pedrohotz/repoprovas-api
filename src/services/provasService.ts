@@ -1,9 +1,9 @@
 import { Prova, ProvaBody } from "../interfaces/provasInterfaces";
 import {getManager, getRepository} from 'typeorm';
-import Categoria from "../entities/Category";
 import ProvaEntity from "../entities/Provas";
 import Disciplina from "../entities/Disciplinas";
 import Professor from "../entities/Professor";
+import { ProfessorBody } from "../interfaces/professorInterface";
 
 
 async function send(provaBody:Prova) : Promise <boolean>{
@@ -57,7 +57,16 @@ async function listByFilter(filter:string) : Promise <ProvaBody[]> {
 }
 
 
+async function listTeacher() : Promise<ProfessorBody[]>{
+    const result = await getRepository(Professor).find();
+    if(result.length === 0) return null;
+    return result;
+}
+
+
+
 export {
     send,
-    listByFilter
+    listByFilter,
+    listTeacher,
 }

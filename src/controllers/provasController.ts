@@ -17,21 +17,30 @@ async function send(req: Request, res: Response) : Promise<Response<any,Record<s
     }
 }
 
-async function listByFilter(req: Request, res: Response): Promise<Response> {
+async function listByFilter(req: Request, res: Response): Promise<Response<any,Record<string,any>>> {
     const filter = req.params.filter;
     try {
         const result = await provasService.listByFilter(filter);
         if(!result) return res.sendStatus(404);
         return res.status(200).send(result)
     } catch (error) {
-        console.log(error);
         res.sendStatus(500);
     }
 }
 
 
+async function listTeacher(req: Request, res: Response) : Promise<Response<any,Record<string,any>>> {
+    try {
+        const result = await provasService.listTeacher();
+        if(!result) return res.sendStatus(404);
+        return res.status(200).send(result);
+    } catch (error) {
+        res.sendStatus(500);
+    }
+}
 
 export {
     send,
     listByFilter,
+    listTeacher,
 }
