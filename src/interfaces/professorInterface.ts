@@ -5,8 +5,11 @@ interface ProfessorBody {
 }
 
 
-
+interface ProfessorBySubject {
+    Name: string;
+}
 
 export {
-    ProfessorBody
+    ProfessorBody,
+    ProfessorBySubject
 }

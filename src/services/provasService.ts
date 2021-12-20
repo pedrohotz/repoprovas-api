@@ -3,7 +3,7 @@ import {getManager, getRepository} from 'typeorm';
 import ProvaEntity from "../entities/Provas";
 import Disciplina from "../entities/Disciplinas";
 import Professor from "../entities/Professor";
-import { ProfessorBody } from "../interfaces/professorInterface";
+import { ProfessorBody, ProfessorBySubject } from "../interfaces/professorInterface";
 
 
 async function send(provaBody:Prova) : Promise <boolean>{
@@ -69,11 +69,22 @@ async function listSubject() : Promise<DisciplinaBody[]>{
     return result;
 }
 
-
+async function listTeacherBySubject(subject:string) : Promise<ProfessorBySubject[]>  {
+    const subjectData = await getRepository(Disciplina).findOne({
+        where: {
+            Name: subject
+        }
+    })
+    const subjectId = subjectData.getId();
+    const result = await getManager().query(`SELECT professores."Name" from prof_disc JOIN professores ON prof_disc."ProfessorId" = professores."Id" WHERE prof_disc."DisciplinaId" = $1;`,[subjectId])
+    if(result.length === 0) return null;
+    return result;
+}
 
 export {
     send,
     listByFilter,
     listTeacher,
     listSubject,
+    listTeacherBySubject,
 }

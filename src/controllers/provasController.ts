@@ -49,10 +49,22 @@ async function listSubject(req: Request, res: Response) : Promise<Response<any,R
     }
 }
 
+async function listTeacherBySubject(req: Request, res: Response) : Promise<Response<any,Record<string,any>>> {
+    const subject  = req.params.disciplina;
+    try {
+        const result = await provasService.listTeacherBySubject(subject);
+        if(!result) return res.sendStatus(404);
+        return res.send(result).status(200);
+    } catch (error) {
+        return res.sendStatus(500)
+    }
+}
+
 
 export {
     send,
     listByFilter,
     listTeacher,
     listSubject,
+    listTeacherBySubject
 }

@@ -12,4 +12,7 @@ export default class Disciplina{
     @Column()
     periodo: number;
 
+   getId(){
+       return this.Id;
+   }
 }
