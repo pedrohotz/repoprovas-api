@@ -37,6 +37,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var typeorm_1 = require("typeorm");
+if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL.indexOf("sslmode=require") === -1) {
+    process.env.DATABASE_URL += "?sslmode=require";
+}
 function connect() {
     return __awaiter(this, void 0, void 0, function () {
         var connectionManager, connection;
@@ -49,7 +52,8 @@ function connect() {
                         name: "default",
                         type: "postgres",
                         url: process.env.DATABASE_URL,
-                        entities: ["src/entities/*.ts"]
+                        entities: ["".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/entities/*.*")],
+                        ssl: process.env.NODE_ENV === 'production'
                     });
                     return [4 /*yield*/, connection.connect()];
                 case 2:
