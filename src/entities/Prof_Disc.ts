@@ -1,14 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
-@Entity('professores')
-export default class Professor{
+@Entity('prof_disc')
+export default class Prof_Disc{
     @PrimaryGeneratedColumn()
     Id: number;
+    
+    @Column()
+    DisciplinaId: number;
 
     @Column()
-    Name: string;
+    ProfessorId: number;
 
-
+   
     getId(){
         return this.Id;
     }

@@ -21,5 +21,6 @@ app.get('/prova/:filter',provasController.listByFilter);
 app.get('/professores',provasController.listTeacher);
 app.get('/disciplinas',provasController.listSubject);
 app.get('/professores/:disciplina', provasController.listTeacherBySubject)
+app.get('/professores/:professor/:disciplina', provasController.listProf_DiscId)
 
 export default app;

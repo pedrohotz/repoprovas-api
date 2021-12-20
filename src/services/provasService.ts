@@ -4,6 +4,7 @@ import ProvaEntity from "../entities/Provas";
 import Disciplina from "../entities/Disciplinas";
 import Professor from "../entities/Professor";
 import { ProfessorBody, ProfessorBySubject } from "../interfaces/professorInterface";
+import Prof_Disc from "../entities/Prof_Disc";
 
 
 async function send(provaBody:Prova) : Promise <boolean>{
@@ -81,10 +82,35 @@ async function listTeacherBySubject(subject:string) : Promise<ProfessorBySubject
     return result;
 }
 
+async function listProf_DiscId(professor: string, disciplina : string) : Promise<number> {
+    const subjectData = await getRepository(Disciplina).findOne({
+        where: {
+            Name: disciplina
+        }
+    })
+    const teacherData = await getRepository(Professor).findOne({
+        where: {
+            Name: professor
+        }
+    })
+    if(!teacherData || !subjectData) return null;
+    const subjectId = subjectData.getId();
+    const teacherId = teacherData.getId();
+    const Prof_DiscData = await getRepository(Prof_Disc).findOne({
+        where: {
+            ProfessorId: teacherId,
+            DisciplinaId: subjectId
+        }
+    })
+    const prof_discId = Prof_DiscData.getId();
+    return prof_discId;
+}
+
 export {
     send,
     listByFilter,
     listTeacher,
     listSubject,
     listTeacherBySubject,
+    listProf_DiscId,
 }
